@@ -1,0 +1,25 @@
+{% extends "todo/base.html" %}
+
+{% block content %}
+
+<ul>
+    {% for todo in todos %}
+    {% if todo.importent%}<b>{% endif%}
+    <li>
+        <a href="{% url 'viewtodo' todo.id %}">
+            {{ todo.title }}
+            {% if todo.memo %} - {{ todo.memo }} {% endif %}
+        </a>
+    </li>
+    {% if todo.importent%}</b>{% endif%}
+    {% endfor %}
+</ul>
+
+<br>
+<form method="get" action="{% url 'createtodo' %}">
+    {% csrf_token %}
+    <button type="submit">New Todo</button>
+</form>
+
+{% endblock %}
+
